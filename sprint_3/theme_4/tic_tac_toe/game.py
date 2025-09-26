@@ -1,11 +1,22 @@
 from gameparts import Board
+from gameparts.exceptions import FieldIndexError
 
-# Создать игровое поле - объект класса Board.
-game = Board()
-# Отрисовать поле в терминале.
-game.display()
-# Разместить на поле символ по указанным координатам - сделать ход.
-game.make_move(1, 1, 'X')
-print('Ход сделан!')
-# Перерисовать поле с учётом сделанного хода.
-game.display()
+def main():
+    game = Board()
+    game.display()
+
+    row = int(input('Введите номер строки: '))
+    if row < 0 or row >= game.field_size:
+        raise FieldIndexError
+
+    column = int(input('Введите номер столбца: '))
+    if column < 0 or column >= game.field_size:
+        raise FieldIndexError
+
+    game.make_move(row, column, 'X')
+    print('Ход сделан!')
+    game.display()
+
+
+if __name__ == '__main__':
+    main() 
